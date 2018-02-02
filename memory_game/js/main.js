@@ -24,33 +24,33 @@ cardImage:"images/queen-of-diamonds.png"
 
 var cardsInPlay = [];
 var checkForMatch = function() {
-  if (cardsInPlay.length === 2 && cardsInPlay[0] === cardsInPlay[1]) {
-  console.log("You found a match!");
-   alert("You found a match!");
+    if (cardsInPlay[0] === cardsInPlay[1]) {
+      console.log("You found a match!");
+      alert("You found a match!");
   } else {
     console.log("Sorry, try again.");
-    alert("Sorry,try again.");
-  }
+    alert("Sorry, try again.");
+  };
 }
 
 var flipCard = function() {
   var cardId = this.getAttribute('data-id');
   this.setAttribute('src', cards[cardId].cardImage); 
+  console.log("User flipped " + cards[cardId].rank + " of " + cards[cardId].suit);
   cardsInPlay.push(cards[cardId].rank);
-  console.log("User flipped" + cards[cardId].rank + "of" + cards[cardId].suit);
-  checkForMatch();
-  console.log(cards[cardId].suit);
-  console.log(cards[cardId].cardImage);
+  if (cardsInPlay.length === 2) {
+  checkForMatch();}
 }
 
-var createBoard = function () {
+var createBoard = function() {
   for (var i = 0; i < cards.length; i++) {
     var cardElement = document.createElement('img');
-    cardElement.setAttribute('src', "images/back.png");
-    cardElement.setAttribute("data-id", 1);
+    cardElement.setAttribute('src', 'images/back.png');
+    cardElement.setAttribute('data-id', i);
     cardElement.addEventListener('click', flipCard); 
-    document.getElementById('game-board').appendChild(cardElement);
-};
+    var gameBoard = document.getElementById('game-board');
+    gameBoard.appendChild(cardElement);
+  };
 }
 
 createBoard();
